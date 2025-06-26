@@ -1,7 +1,6 @@
 
 
 
-import Link from "next/link";
 
 import { LatestPost } from "@/components/ui/post";
 import { auth, signIn, signOut } from "@/server/auth";
@@ -23,23 +22,7 @@ export default async function Chat() {
     return (
         <>
             <div className="absolute m-7">
-                <div className="flex items-center">
-
-                    <Link
-                        href={session ? "/api/auth/signout?callbackUrl=/" : "/api/auth/signin?callbackUrl=/chat"}
-                        className="rounded bg-white/50 px-2 py-1 font-semibold no-underline transition hover:bg-white/20"
-                    >
-                        {session ? "Sign out" : "Sign in"}
-                    </Link>
-
-                    <p className="text-center text-md text-white px-4">
-                        {session && <span>Logged in as {session.user?.name}</span>}
-                    </p>
-
-
-                </div>
-
-
+            <MyMenuBar />
             </div>
 
             <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
