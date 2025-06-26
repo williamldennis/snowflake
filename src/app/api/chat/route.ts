@@ -9,7 +9,7 @@ export async function POST(req: Request) {
 
     const result = streamText({
         model: openai('gpt-4-turbo'),
-        system: 'You are a helpful assistant.',
+        system: 'You are interviewing users based on their personality, trying to determine their enneagram number',
         messages,
     });
 
