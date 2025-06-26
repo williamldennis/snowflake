@@ -1,8 +1,10 @@
 import Link from "next/link";
 
-import { LatestPost } from "@/app/_components/post";
+import { LatestPost } from "@/components/ui/post";
 import { auth } from "@/server/auth";
 import { api, HydrateClient } from "@/trpc/server";
+import { manrope } from "./layout";
+
 
 export default async function Home() {
   const hello = await api.post.hello({ text: "from tRPC" });
@@ -14,12 +16,24 @@ export default async function Home() {
 
   return (
     <HydrateClient>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
+
+      <div className="relative h-screen w-screen overflow-hidden bg-black/90">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover z-[-1] blur-lg"
+        >
+          <source src="/snowflake-hero-vid.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-12 px-4 py-16 text-white">
+          <h1 className="text-4xl font-extrabold tracking-tight sm:text-[5rem]">
+            snowflake
           </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
+          {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
             <Link
               className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
               href="https://create.t3.gg/en/usage/first-steps"
@@ -42,7 +56,7 @@ export default async function Home() {
                 to deploy it.
               </div>
             </Link>
-          </div>
+          </div> */}
           <div className="flex flex-col items-center gap-2">
             <p className="text-2xl text-white">
               {hello ? hello.greeting : "Loading tRPC query..."}
@@ -53,7 +67,7 @@ export default async function Home() {
                 {session && <span>Logged in as {session.user?.name}</span>}
               </p>
               <Link
-                href={session ? "/api/auth/signout" : "/api/auth/signin"}
+                href={session ? "/api/auth/signout" : "/api/auth/signin?callbackUrl=/chat"}
                 className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
               >
                 {session ? "Sign out" : "Sign in"}
@@ -63,7 +77,7 @@ export default async function Home() {
 
           {session?.user && <LatestPost />}
         </div>
-      </main>
+      </div>
     </HydrateClient>
   );
 }
