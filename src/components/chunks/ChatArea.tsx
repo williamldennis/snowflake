@@ -5,37 +5,51 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useChat } from '@ai-sdk/react';
 
-export default function ChatArea() {
+type ChatAreaProps = {
+    name: string | null,
+}
+
+
+export default function ChatArea({ name }: ChatAreaProps) {
     const { messages, input, handleInputChange, handleSubmit, status, stop } = useChat({});
 
     return (
         <div className="container flex flex-col items-center justify-center gap-6">
-            <div>Spirit Animal</div>
-            <ScrollArea className="h-[80vh] w-[400px] rounded-md border border-purple-100 p-4">
+            <div>🦊 Spirit Animal</div>
+            <ScrollArea className="h-[80vh] w-[450px] rounded-md border border-purple-100 p-4">
                 {messages.map(message => (
-                    <div key={message.id}>
-                        <div className="font-bold mb-4">
-                            {message.role === 'user' ? 'User: ' : 'AI: '}
+                    <div className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`} key={message.id}>
+
+                        <div>
+
+                            {message.role === 'user'
+                                ? (
+                                    <>
+                                        <div className="flex flex-col">
+                                            <div className="font-bold p-3 text-right">
+                                                {/* {name} */}
+                                            </div>
+                                            <div className="bg-white/20 rounded-xl max-w-[80%] ml-auto pr-8 p-4">
+                                                {message.content}
+                                            </div>
+                                        </div>
+                                    </>
+
+                                ) : (
+                                    <>
+                                        <div className="flex flex-col">
+                                            <div className="font-bold p-3 text-left">
+                                                {/* 🦊 spirit animal */}
+                                            </div>
+                                            <div className=" bg-black/20 rounded-xl p-4 text-purple-100 max-w-[80%]">
+                                                {message.content}
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
                         </div>
-                        {message.role === 'user'
-                            ? (
-                                <div className="mb-5 bg-white/20 rounded-xl p-4">
-                                    {message.content}
-                                </div>
-                            )
-                            : (
-                                <div className="mb-5 bg-black/20 rounded-xl p-4 text-purple-100">
-                                    {message.content}
-                                </div>
-                            )
-
-                        }
-
-
-
                     </div>
-                ))
-                }
+                ))}
             </ScrollArea >
 
             <div className="flex w-full max-w-sm items-center gap-2">
