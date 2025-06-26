@@ -7,13 +7,14 @@ import { LatestPost } from "@/components/ui/post";
 import { auth, signIn, signOut } from "@/server/auth";
 import { api, HydrateClient } from "@/trpc/server";
 import MyMenuBar from "src/components/chunks/MyMenuBar"
+import { redirect } from "next/navigation";
 export default async function Chat() {
-    const hello = await api.post.hello({ text: "from tRPC" });
     const session = await auth();
 
-    if (session?.user) {
-        void api.post.getLatest.prefetch();
+    if (!session) {
+        redirect("/")
     }
+  
 
     return (
         <>
