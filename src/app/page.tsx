@@ -3,6 +3,8 @@ import Link from "next/link";
 import { LatestPost } from "@/app/_components/post";
 import { auth } from "@/server/auth";
 import { api, HydrateClient } from "@/trpc/server";
+import { manrope } from "./layout";
+
 
 export default async function Home() {
   const hello = await api.post.hello({ text: "from tRPC" });
@@ -15,7 +17,7 @@ export default async function Home() {
   return (
     <HydrateClient>
 
-      <div className="relative h-screen w-screen overflow-hidden bg-purple-950/80">
+      <div className="relative h-screen w-screen overflow-hidden bg-black/90">
         <video
           autoPlay
           loop
@@ -28,7 +30,7 @@ export default async function Home() {
         </video>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-12 px-4 py-16 text-white">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
+          <h1 className="text-4xl font-extrabold tracking-tight sm:text-[5rem]">
             snowflake
           </h1>
           {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
@@ -65,7 +67,7 @@ export default async function Home() {
                 {session && <span>Logged in as {session.user?.name}</span>}
               </p>
               <Link
-                href={session ? "/api/auth/signout" : "/api/auth/signin"}
+                href={session ? "/api/auth/signout" : "/api/auth/signin?callbackUrl=/chat"}
                 className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
               >
                 {session ? "Sign out" : "Sign in"}
