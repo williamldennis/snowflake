@@ -4,7 +4,6 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useChat } from '@ai-sdk/react';
-import { DotLoader } from '@react-spinners'
 
 export default function ChatArea() {
     const { messages, input, handleInputChange, handleSubmit, status, stop } = useChat({});
