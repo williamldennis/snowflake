@@ -34,6 +34,9 @@ export default function ChatClientShell({
         initialMessages,
         sendExtraMessageFields: true,
     });
+
+    const userMessageCount = messages.filter((m) => m.role === 'user').length;
+
     return (
         <>
             <div className="absolute bottom-0 m-7">
@@ -44,11 +47,13 @@ export default function ChatClientShell({
             <div className="flex justify-center min-h-screen bg-gray-100 bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
                 <div className="hidden lg:block p-4 mt-20">
                     <Levels
+                        messages={messages}
                         messageCount={messages.length}
+                        userMessages={userMessageCount}
                     />
                 </div>
                 <div className=" flex flex-col w-full max-w-[450px] p-4 justify-center items-center">
-                    <div className="mb-4">samesies</div>
+                    <div className="mb-4 font-bold text-2xl">samesies</div>
                     <MessagesArea
                         messages={messages}
                         input={input}

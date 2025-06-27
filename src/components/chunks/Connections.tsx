@@ -1,10 +1,10 @@
 'use client'
 
 import { Checkbox } from "@/components/ui/checkbox"
-import type { UIMessage } from "ai";
+import type { Message } from "ai";
 
 type ConnectionsProps = {
-    messages: UIMessage[];
+    messages: Message[];
 };
 
 export default function Connections(messages: ConnectionsProps) {
