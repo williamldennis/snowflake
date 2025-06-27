@@ -16,7 +16,7 @@ export default function ProgressBar({ value, label }: ProgressBarProps) {
                 />
 
                 {/* Label centered over the bar */}
-                <div className="absolute inset-0 flex items-center justify-center text-sm font-medium text-white">
+                <div className="absolute inset-0 flex items-center justify-center text-sm font-medium text-black">
                     {value} {label ?? `${value}/10`}
                 </div>
             </div>

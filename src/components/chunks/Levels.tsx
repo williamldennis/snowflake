@@ -25,9 +25,6 @@ export default function Levels({ userMessages, messageCount, messages }: LevelsP
                         Send 10 messages to discover who you're most similar to
                     </div>
                     <div>
-                        <div className="font-bold mb-2 border rounded p-4 text-center mt-6 text-2xl">
-                            {userMessages} messages sent
-                        </div>
                         <div className="py-2">
                             <ProgressBar
                                 value={userMessages}

@@ -4,6 +4,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { type Message } from '@ai-sdk/react';
+import { useEffect, useRef } from "react";
 
 type MessagesAreaProps = {
     name: string;
@@ -26,6 +27,11 @@ export default function ChatArea({
     status,
 }: MessagesAreaProps) {
 
+    const bottomRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
 
     return (
         <div className="container flex flex-col items-center justify-center gap-6">
@@ -61,6 +67,8 @@ export default function ChatArea({
                         </div>
                     </div>
                 ))}
+                {/* 👇 Empty div used as anchor to scroll to bottom */}
+                <div ref={bottomRef} />
             </ScrollArea >
 
             <div className="flex w-full max-w-sm items-center gap-2">
