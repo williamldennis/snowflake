@@ -2,7 +2,7 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { db } from "@/server/db";
-import { chatTranscripts, matchResults } from "@/server/db/schema";
+import { chatTranscripts, matchResults, users } from "@/server/db/schema";
 import { eq, ne } from "drizzle-orm";
 import OpenAI from "openai";
 
@@ -87,12 +87,34 @@ Reason: Y
     getMatchResult: publicProcedure
         .input(z.object({ chatId: z.string() }))
         .query(async ({ input }) => {
-            const [match] = await db
+            const [result] = await db
                 .select()
                 .from(matchResults)
                 .where(eq(matchResults.chatId, input.chatId));
 
-            return match ?? null;
+            if (!result) return null;
+
+            // Get the transcript of the matched user
+            const [matchedTranscript] = await db
+                .select()
+                .from(chatTranscripts)
+                .where(eq(chatTranscripts.id, result.matchedChatId));
+
+            if (!matchedTranscript) return null;
+
+            // Get the user behind that transcript
+            const [user] = await db
+                .select()
+                .from(users)
+                .where(eq(users.id, matchedTranscript.userId));
+
+            return {
+                matchedChatId: result.matchedChatId,
+                score: result.score,
+                reason: result.reason,
+                matchedUserName: user?.name ?? "Anonymous",
+            };
         }),
+
 
 });

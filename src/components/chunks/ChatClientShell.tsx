@@ -93,6 +93,7 @@ export default function ChatClientShell({
                                     matchedId: matchResult.matchedChatId,
                                     score: matchResult.score,
                                     reason: matchResult.reason,
+                                    matchedUserName: matchResult.matchedUserName
                                 }
                                 : null
                         }
