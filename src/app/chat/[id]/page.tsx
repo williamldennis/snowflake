@@ -1,5 +1,3 @@
-'server only'
-
 import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
 import { loadChat } from "@/lib/chat-store";

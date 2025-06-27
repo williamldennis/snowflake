@@ -1,7 +1,7 @@
 'use client'
 
 import { useChat } from '@ai-sdk/react';
-import MessagesArea from "./MessagesArea";
+import MessagesArea from "./ChatArea";
 import MyMenuBar from "./MyMenuBar";
 import Levels from "./Levels";
 import Connections from "./Connections";
@@ -48,7 +48,7 @@ export default function ChatClientShell({
                     />
                 </div>
                 <div className=" flex flex-col w-full max-w-[450px] p-4 justify-center items-center">
-                    <div className="mb-4">🦊 Spirit Animal</div>
+                    <div className="mb-4">samesies</div>
                     <MessagesArea
                         messages={messages}
                         input={input}

@@ -6,7 +6,7 @@ type MenuBarProps = {
 
 import Link from "next/link";
 
-export default async function MyMenuBar({ name }: MenuBarProps) {
+export default function MyMenuBar({ name }: MenuBarProps) {
     return (
         <div className="flex items-center">
 
