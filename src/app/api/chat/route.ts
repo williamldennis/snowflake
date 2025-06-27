@@ -1,16 +1,29 @@
 import { openai } from '@ai-sdk/openai';
-import { streamText } from 'ai';
+import { appendResponseMessages, streamText } from 'ai';
+import { systemPrompt } from './systemprompt';
+import { saveChat } from '@/lib/chat-store';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-    const { messages } = await req.json();
+    const { messages, id } = await req.json();
 
     const result = streamText({
         model: openai('gpt-4-turbo'),
-        system: 'You are interviewing users based on their personality, trying to determine their enneagram number',
+        system: systemPrompt,
         messages,
+        async onFinish({ response }) {
+            console.log("onFinish triggered — response:", response);
+
+            await saveChat({
+                id,
+                messages: appendResponseMessages({
+                    messages,
+                    responseMessages: response.messages,
+                }),
+            });
+        },
     });
 
     return result.toDataStreamResponse();

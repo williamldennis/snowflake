@@ -106,3 +106,34 @@ export const verificationTokens = createTable(
   }),
   (t) => [primaryKey({ columns: [t.identifier, t.token] })],
 );
+
+export const chats = createTable("chat", (d) => ({
+  id: d
+    .varchar({ length: 255 }) // or use `.uuid()` if you prefer
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: d
+    .varchar({ length: 255 })
+    .notNull()
+    .references(() => users.id),
+  role: d
+    .varchar({ length: 50 }) // e.g. "user", "assistant", or "system"
+    .notNull(),
+  content: d
+    .text()
+    .notNull(),
+  createdAt: d
+    .timestamp({ withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+}));
+
+export const chatTranscripts = createTable("chat_transcript", (d) => ({
+  id: d.varchar({ length: 255 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+  userId: d.varchar({ length: 255 }).notNull().references(() => users.id),
+  transcript: d.text().notNull(), // store full conversation
+  createdAt: d
+    .timestamp({ withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+}));

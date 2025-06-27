@@ -3,15 +3,23 @@
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useChat } from '@ai-sdk/react';
+import { useChat, type Message } from '@ai-sdk/react';
+import { useRef } from "react";
 
 type ChatAreaProps = {
     name: string | null,
 }
 
 
-export default function ChatArea({ name }: ChatAreaProps) {
-    const { messages, input, handleInputChange, handleSubmit, status, stop } = useChat({});
+export default function ChatArea({
+    id,
+    initialMessages,
+}: { id?: string | undefined; initialMessages?: Message[] } = {}) {
+    const { messages, input, handleInputChange, handleSubmit, status, stop } = useChat({
+        id, // use the provided chat ID
+        initialMessages, // initial messages if provided
+        sendExtraMessageFields: true, // send id and createdAt for each message
+    });
 
     return (
         <div className="container flex flex-col items-center justify-center gap-6">
@@ -58,7 +66,7 @@ export default function ChatArea({ name }: ChatAreaProps) {
                         name="prompt"
                         value={input}
                         onChange={handleInputChange}
-                        disabled={status !== 'ready'} />
+                    />
                     {
                         (status === 'submitted' || status === 'streaming') ? (
                             <Button

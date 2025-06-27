@@ -5,7 +5,8 @@ export default function Levels() {
 
     return (
         <div className="flex flex-col">
-            <div className="border rounded-lg p-4 w-80 flex items-center bg-white/10 mb-6">
+            <div className="text-lg pb-4 font-bold">Levels</div>
+            <div className="rounded-lg p-4 w-80 flex items-center bg-white/10 mb-6">
                 <div className="pr-3">
                     <Checkbox id="terms" />
                 </div>
@@ -18,7 +19,7 @@ export default function Levels() {
                     </p>
                 </div>
             </div>
-            <div className="border rounded-lg p-4 w-80 flex items-center bg-white/10 mb-6">
+            <div className="rounded-lg p-4 w-80 flex items-center bg-white/10 mb-6">
                 <div className="pr-3">
                     <Checkbox id="terms" />
                 </div>
@@ -31,7 +32,7 @@ export default function Levels() {
                     </p>
                 </div>
             </div>
-            <div className="border rounded-lg p-4 w-80 flex items-center bg-white/10 mb-5">
+            <div className="rounded-lg p-4 w-80 flex items-center bg-white/10 mb-5">
                 <div className="pr-3">
                     <Checkbox id="terms" />
                 </div>
@@ -44,7 +45,7 @@ export default function Levels() {
                     </p>
                 </div>
             </div>
-            <div className="border rounded-lg p-4 w-80 flex items-center bg-white/10 mb-5">
+            <div className="rounded-lg p-4 w-80 flex items-center bg-white/10 mb-5">
                 <div className="pr-3">
                     <Checkbox id="terms" />
                 </div>
