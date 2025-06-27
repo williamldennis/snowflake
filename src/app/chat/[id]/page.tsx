@@ -19,14 +19,15 @@ export default async function ChatPage({ params }: { params: { id: string } }) {
 
     return (
         <>
-            <div className="absolute m-7">
+            <div className="absolute bottom-0 m-7">
                 <MyMenuBar />
             </div>
             <div className="flex justify-center min-h-screen bg-gray-100 bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
                 <div className="hidden lg:block p-4 mt-20">
                     <Levels />
                 </div>
-                <div className="w-full max-w-[450px] p-4">
+                <div className=" flex flex-col w-full max-w-[450px] p-4 justify-center items-center">
+                    <div className="mb-4">🦊 Spirit Animal</div>
                     <ChatArea
                         id={params.id} // <- CRITICAL: this is passed into useChat
                         initialMessages={initialTranscript ? JSON.parse(initialTranscript) : []}

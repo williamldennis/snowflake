@@ -9,13 +9,13 @@ export default async function MyMenuBar() {
 
             <Link
                 href={session ? "/api/auth/signout?callbackUrl=/" : "/api/auth/signin?callbackUrl=/chat"}
-                className="rounded bg-white/50 px-2 py-1 font-semibold no-underline transition hover:bg-white/20"
+                className="rounded bg-white/30 px-2 py-1 font-semibold no-underline transition hover:bg-white/80"
             >
                 {session ? "Sign out" : "Sign in"}
             </Link>
 
-            <p className="text-center text-md text-white px-4">
-                {session && <span>Logged in as {session.user?.name}</span>}
+            <p className="text-center text-md text-white/50 px-4">
+                {session && <span>Hi, {session.user?.name}</span>}
             </p>
 
 
