@@ -1,7 +1,13 @@
+'use client'
+
+
+type LevelsProps = {
+    messageCount: number;
+};
 
 import { Checkbox } from "@/components/ui/checkbox"
 
-export default function Levels() {
+export default function Levels({ messageCount }: LevelsProps) {
 
     return (
         <div className="flex flex-col">

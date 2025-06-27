@@ -6,20 +6,27 @@ import { Input } from "@/components/ui/input"
 import { useChat, type Message } from '@ai-sdk/react';
 import { useRef } from "react";
 
-type ChatAreaProps = {
-    name: string | null,
-}
+type MessagesAreaProps = {
+    name: string;
+    messages: Message[];
+    input: string;
+    handleInputChange: React.ChangeEventHandler<HTMLInputElement>;
+    handleSubmit: React.FormEventHandler<HTMLFormElement>;
+    stop: () => void;
+    status: 'streaming' | 'submitted' | 'ready' | 'error';
+};
 
 
-export default function ChatArea({
-    id,
-    initialMessages,
-}: { id?: string | undefined; initialMessages?: Message[] } = {}) {
-    const { messages, input, handleInputChange, handleSubmit, status, stop } = useChat({
-        id, // use the provided chat ID
-        initialMessages, // initial messages if provided
-        sendExtraMessageFields: true, // send id and createdAt for each message
-    });
+export default function MessagesArea({
+    name,
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    stop,
+    status,
+}: MessagesAreaProps) {
+
 
     return (
         <div className="container flex flex-col items-center justify-center gap-6">

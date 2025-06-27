@@ -1,7 +1,13 @@
+'use client'
 
 import { Checkbox } from "@/components/ui/checkbox"
+import type { UIMessage } from "ai";
 
-export default function Connections() {
+type ConnectionsProps = {
+    messages: UIMessage[];
+};
+
+export default function Connections(messages: ConnectionsProps) {
 
     return (
         <div className="flex flex-col">
