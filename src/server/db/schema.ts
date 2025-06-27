@@ -137,3 +137,13 @@ export const chatTranscripts = createTable("chat_transcript", (d) => ({
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
 }));
+
+
+export const matchResults = createTable("match_result", (d) => ({
+  id: d.varchar({ length: 255 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+  chatId: d.varchar({ length: 255 }).notNull(),
+  matchedChatId: d.varchar({ length: 255 }).notNull(),
+  score: d.integer().notNull(),
+  reason: d.text().notNull(),
+  createdAt: d.timestamp({ withTimezone: true }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+}));

@@ -3,11 +3,20 @@
 import { Checkbox } from "@/components/ui/checkbox"
 import type { Message } from "ai";
 
+// Connections.tsx
+
 type ConnectionsProps = {
     messages: Message[];
+    matchResult: {
+        matchedId: string | undefined;
+        score: number;
+        reason: string;
+    } | null;
 };
 
-export default function Connections(messages: ConnectionsProps) {
+
+
+export default function Connections({ matchResult }: ConnectionsProps) {
 
     return (
         <div className="flex flex-col">
@@ -20,9 +29,15 @@ export default function Connections(messages: ConnectionsProps) {
                     <div className="font-bold">
                         You are most similar to:
                     </div>
-                    <p>
-                        Sarah Phoenix
-                    </p>
+                    {matchResult ? (
+                        <div className="bg-white/10 p-4 rounded-md">
+                            <p className="text-white">🧬 You're most similar to another user.</p>
+                            <p className="text-white/60 text-sm mt-1">Similarity score: {matchResult.score}/10</p>
+                            <blockquote className="italic text-white/70 mt-2">“{matchResult.reason}”</blockquote>
+                        </div>
+                    ) : (
+                        <p className="text-white/40 text-sm italic">Looking for your match...</p>
+                    )}
                 </div>
             </div>
             <div className="rounded-lg p-4 w-80 flex items-center bg-black/20 mb-5">

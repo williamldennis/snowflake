@@ -105,9 +105,9 @@ export default function ChatArea({
 
                         ) : (
                             < Button
-                                className="border bg-white text-purple-950"
+                                className="border bg-white text-purple-950 py-5"
                                 type="submit">
-                                Submit
+                                Send
                             </Button>)
                     }
 
