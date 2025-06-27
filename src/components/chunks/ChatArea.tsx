@@ -26,6 +26,7 @@ export default function ChatArea({
             <ScrollArea className="h-[80vh] w-[450px] rounded-md border border-purple-100 p-4">
                 {messages.map(message => (
                     <div className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`} key={message.id}>
+
                         <div>
                             {message.role === 'user'
                                 ? (
@@ -71,6 +72,7 @@ export default function ChatArea({
                                 onClick={() => stop()}>
                                 Stop
                             </Button>
+
                         ) : (
                             < Button
                                 className="border bg-white text-purple-950"
@@ -78,6 +80,7 @@ export default function ChatArea({
                                 Submit
                             </Button>)
                     }
+
                 </form>
             </div>
         </div >

@@ -17,6 +17,7 @@ export default function Levels() {
                     <p>
                         Send 10 messages to discover who you're most similar to
                     </p>
+
                 </div>
             </div>
             <div className="rounded-lg p-4 w-80 flex items-center bg-white/10 mb-6">
