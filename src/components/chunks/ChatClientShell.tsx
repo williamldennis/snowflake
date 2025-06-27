@@ -52,7 +52,7 @@ export default function ChatClientShell({
                         userMessages={userMessageCount}
                     />
                 </div>
-                <div className=" flex flex-col w-full max-w-[450px] p-4 justify-center items-center">
+                <div className=" flex flex-col w-full max-w-[450px] justify-center items-center">
                     <div className="mb-4 font-bold text-2xl">samesies</div>
                     <MessagesArea
                         messages={messages}

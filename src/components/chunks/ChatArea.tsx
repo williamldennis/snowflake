@@ -28,6 +28,18 @@ export default function ChatArea({
 }: MessagesAreaProps) {
 
     const bottomRef = useRef<HTMLDivElement>(null);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    const handleTextareaChange: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+        // Resize textarea height dynamically
+        if (textareaRef.current) {
+            textareaRef.current.style.height = 'auto';
+            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+        }
+        // Forward event to useChat handler
+        handleInputChange(e as unknown as React.ChangeEvent<HTMLInputElement>);
+    };
+
 
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -35,7 +47,7 @@ export default function ChatArea({
 
     return (
         <div className="container flex flex-col items-center justify-center gap-6">
-            <ScrollArea className="h-[80vh] w-[450px] rounded-md border border-purple-100 p-4">
+            <ScrollArea className="h-[80vh] w-[450px] rounded-md border border-purple-100 px-4">
                 {messages.map(message => (
                     <div className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`} key={message.id}>
 
@@ -71,13 +83,17 @@ export default function ChatArea({
                 <div ref={bottomRef} />
             </ScrollArea >
 
-            <div className="flex w-full max-w-sm items-center gap-2">
-                <form onSubmit={handleSubmit} className="flex w-full">
-                    <Input className="mr-2"
+            <div className="flex w-full items-center gap-2">
+                <form onSubmit={handleSubmit} className="flex w-full items-center gap-2">
+                    <textarea
+                        ref={textareaRef}
+                        className="w-full resize-none overflow-hidden rounded-md p-2 border bg-white/10 text-white"
                         name="prompt"
                         value={input}
-                        onChange={handleInputChange}
+                        onChange={handleTextareaChange}
+                        rows={1}
                     />
+
                     {
                         (status === 'submitted' || status === 'streaming') ? (
                             <Button
