@@ -12,13 +12,7 @@ type ChatAreaProps = {
 
 
 export default function ChatArea({ name }: ChatAreaProps) {
-    const inputRef = useRef<HTMLInputElement>(null)
     const { messages, input, handleInputChange, handleSubmit, status, stop } = useChat({});
-
-    const customSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        await handleSubmit(e)
-        inputRef.current?.focus()
-    }
 
     return (
         <div className="container flex flex-col items-center justify-center gap-6">
@@ -60,9 +54,8 @@ export default function ChatArea({ name }: ChatAreaProps) {
             </ScrollArea >
 
             <div className="flex w-full max-w-sm items-center gap-2">
-                <form onSubmit={customSubmit} className="flex w-full">
+                <form onSubmit={handleSubmit} className="flex w-full">
                     <Input className="mr-2"
-                        ref={inputRef}
                         name="prompt"
                         value={input}
                         onChange={handleInputChange}
