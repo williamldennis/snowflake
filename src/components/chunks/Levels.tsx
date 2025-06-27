@@ -1,7 +1,13 @@
+'use client'
+
+
+type LevelsProps = {
+    messageCount: number;
+};
 
 import { Checkbox } from "@/components/ui/checkbox"
 
-export default function Levels() {
+export default function Levels({ messageCount }: LevelsProps) {
 
     return (
         <div className="flex flex-col">
@@ -15,8 +21,9 @@ export default function Levels() {
                         Level 1
                     </div>
                     <p>
-                        Discover your Enneagram type
+                        Send 10 messages to discover who you're most similar to
                     </p>
+
                 </div>
             </div>
             <div className="rounded-lg p-4 w-80 flex items-center bg-white/10 mb-6">
@@ -28,7 +35,7 @@ export default function Levels() {
                         Level 2
                     </div>
                     <p>
-                        Find your aptitudes
+                        Send 10 messages to find out who you're least similar to
                     </p>
                 </div>
             </div>
@@ -41,7 +48,7 @@ export default function Levels() {
                         Level 3
                     </div>
                     <p>
-                        Offer to help
+                        Send 10 messages describing how you can help someone
                     </p>
                 </div>
             </div>
@@ -54,7 +61,7 @@ export default function Levels() {
                         Level 4
                     </div>
                     <p>
-                        Find your people
+                        Send 10 messages describing help you're looking for in your life (ie job hunting, new couch, etc)
                     </p>
                 </div>
             </div>

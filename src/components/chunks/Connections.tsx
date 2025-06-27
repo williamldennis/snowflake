@@ -1,7 +1,13 @@
+'use client'
 
 import { Checkbox } from "@/components/ui/checkbox"
+import type { UIMessage } from "ai";
 
-export default function Connections() {
+type ConnectionsProps = {
+    messages: UIMessage[];
+};
+
+export default function Connections(messages: ConnectionsProps) {
 
     return (
         <div className="flex flex-col">
@@ -38,10 +44,23 @@ export default function Connections() {
                 </div>
                 <div>
                     <div className="font-bold">
-                        Talk tennis with
+                        You might be able to help
                     </div>
                     <p>
                         Pete Sampras
+                    </p>
+                </div>
+            </div>
+            <div className="rounded-lg p-4 w-80 flex items-center bg-black/20 mb-5">
+                <div className="pr-3">
+                    <Checkbox id="terms" />
+                </div>
+                <div>
+                    <div className="font-bold">
+                        Get help from
+                    </div>
+                    <p>
+                        Bob Costa
                     </p>
                 </div>
             </div>

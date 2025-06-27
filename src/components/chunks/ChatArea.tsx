@@ -3,33 +3,37 @@
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useChat, type Message } from '@ai-sdk/react';
-import { useRef } from "react";
+import { type Message } from '@ai-sdk/react';
 
-type ChatAreaProps = {
-    name: string | null,
-}
+type MessagesAreaProps = {
+    name: string;
+    messages: Message[];
+    input: string;
+    handleInputChange: React.ChangeEventHandler<HTMLInputElement>;
+    handleSubmit: React.FormEventHandler<HTMLFormElement>;
+    stop: () => void;
+    status: 'streaming' | 'submitted' | 'ready' | 'error';
+};
 
 
 export default function ChatArea({
-    id,
-    initialMessages,
-}: { id?: string | undefined; initialMessages?: Message[] } = {}) {
-    const { messages, input, handleInputChange, handleSubmit, status, stop } = useChat({
-        id, // use the provided chat ID
-        initialMessages, // initial messages if provided
-        sendExtraMessageFields: true, // send id and createdAt for each message
-    });
+    name,
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    stop,
+    status,
+}: MessagesAreaProps) {
+
 
     return (
         <div className="container flex flex-col items-center justify-center gap-6">
-            <div>🦊 Spirit Animal</div>
             <ScrollArea className="h-[80vh] w-[450px] rounded-md border border-purple-100 p-4">
                 {messages.map(message => (
                     <div className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`} key={message.id}>
 
                         <div>
-
                             {message.role === 'user'
                                 ? (
                                     <>
@@ -42,7 +46,6 @@ export default function ChatArea({
                                             </div>
                                         </div>
                                     </>
-
                                 ) : (
                                     <>
                                         <div className="flex flex-col">
