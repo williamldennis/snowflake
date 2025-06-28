@@ -73,7 +73,7 @@ export default function ChatClientShell({
                     />
                 </div>
                 <div className="flex flex-col w-full max-w-[450px] justify-center items-center">
-                    <div className="mb-4 font-bold text-2xl">hiiii.ai</div>
+                    <div className="mb-4 font-bold text-2xl">Samesies</div>
                     <MessagesArea
                         messages={messages}
                         input={input}

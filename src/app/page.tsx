@@ -32,9 +32,9 @@ export default async function Home() {
         <div className="absolute inset-0 flex flex-col items-center justify-center px-4 py-8 text-white">
           <div className="flex flex-col items-center justify-center border border-white/10 p-12 py-20 rounded-3xl backdrop-blur-sm">
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-[5rem] mb-4">
-              spirit animal
+              Samesies
             </h1>
-            <p className="text-lg mb-7">Find yourself. Find your humans.</p>
+            <p className="text-lg mb-7">Find your humans.</p>
             <div className="flex flex-col items-center gap-2">
               {/* <p className="text-2xl text-white">
               {hello ? hello.greeting : "Loading tRPC query..."}
