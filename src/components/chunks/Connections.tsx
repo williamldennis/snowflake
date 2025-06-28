@@ -18,6 +18,10 @@ type ConnectionsProps = {
 
 
 export default function Connections({ matchResult, totalCount }: ConnectionsProps) {
+    if (typeof window !== 'undefined') {
+        // eslint-disable-next-line no-console
+        console.log('[Connections] matchResult:', matchResult, 'totalCount:', totalCount);
+    }
 
     return (
         <div className="flex flex-col items-center">

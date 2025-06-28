@@ -36,7 +36,11 @@ export default function ChatClientShell({
     const userMessageCount = messages.filter((m) => m.role === 'user').length;
 
     // ✅ tRPC query to fetch match result from DB (even on refresh)
-    const { data: matchResult, refetch } = api.chat.getMatchResult.useQuery({ chatId });
+    const { data: matchResult, refetch, isLoading: matchLoading, error: matchError } = api.chat.getMatchResult.useQuery({ chatId });
+    if (typeof window !== 'undefined') {
+        // eslint-disable-next-line no-console
+        console.log('[ChatClientShell] matchResult:', matchResult, 'loading:', matchLoading, 'error:', matchError);
+    }
 
     //tRPC To get total users
     const { data: totalCount } = api.chat.getTotalTranscriptCount.useQuery();
@@ -44,7 +48,17 @@ export default function ChatClientShell({
     // ✅ tRPC mutation to run comparison
     const compareMutation = api.chat.compareTranscript.useMutation({
         onSuccess: async () => {
+            if (typeof window !== 'undefined') {
+                // eslint-disable-next-line no-console
+                console.log('[ChatClientShell] compareMutation success');
+            }
             await refetch(); // re-fetch match result after matching completes
+        },
+        onError: (err) => {
+            if (typeof window !== 'undefined') {
+                // eslint-disable-next-line no-console
+                console.error('[ChatClientShell] compareMutation error:', err);
+            }
         },
     });
 
