@@ -1,7 +1,9 @@
 import Link from "next/link";
 
-import { auth } from "@/server/auth";
+import { auth, signIn } from "@/server/auth";
 import { api, HydrateClient } from "@/trpc/server";
+import { Button } from "@/components/ui/button";
+import LoginButton from "@/components/ui/LoginButton";
 
 
 export default async function Home() {
@@ -37,13 +39,17 @@ export default async function Home() {
               {hello ? hello.greeting : "Loading tRPC query..."}
             </p> */}
 
-              <div className="flex flex-col items-center justify-center gap-4">
-                <Link
-                  href={session ? "/chat" : "/api/auth/signin?callbackUrl=/chat"}
+              <div className="flex">
+                
+                <LoginButton />
+                {/* <Link
+                  href={session ? "/chat" : "/api/auth/signin/google?callbackUrl=/chat"}
                   className="rounded-full bg-white/10 px-15 py-4 text-lg font-semibold no-underline transition hover:bg-white/20 "
                 >
-                  {session ? "Go to chat" : "Sign in"}
-                </Link>
+                  <div className="">
+                    {session ? "Go to chat" : "Login with Google"}
+                  </div>
+                </Link> */}
               </div>
             </div>
 
