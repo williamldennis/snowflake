@@ -1,7 +1,7 @@
-[] count messages
-[] after hit 10, compare user transcripts
-[] display score, reason, name
-[] deploy
+[X] count messages
+[X] after hit 10, compare user transcripts
+[X] display score, reason, name
+[X] deploy
 
 
 

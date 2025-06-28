@@ -26,7 +26,7 @@ export default function ChatClientShell({
         handleInputChange,
         handleSubmit,
         stop,
-        status,
+        status
     } = useChat({
         id: chatId,
         initialMessages,
@@ -76,7 +76,11 @@ export default function ChatClientShell({
                     />
                 </div>
                 <div className="flex flex-col w-full max-w-[450px] justify-center items-center">
-                    <div className="mb-4 font-bold text-2xl">Samesies</div>
+                    <div
+                        style={{ fontFamily: 'var(--font-syne)' }}
+                        className="mb-4 font-bold text-2xl">
+                        whomst
+                    </div>
                     <MessagesArea
                         messages={messages}
                         input={input}

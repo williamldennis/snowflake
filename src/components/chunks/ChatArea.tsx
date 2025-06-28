@@ -45,7 +45,7 @@ export default function ChatArea({
 
     return (
         <div className="container flex flex-col items-center justify-center gap-6">
-            <ScrollArea className="h-[80vh] w-[450px] rounded-md border border-purple-100 px-4">
+            <ScrollArea className="h-[80vh] w-[450px] rounded-md border border-purple-400/10 px-4">
                 {messages.map(message => (
                     <div className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`} key={message.id}>
 
@@ -89,6 +89,13 @@ export default function ChatArea({
                         name="prompt"
                         value={input}
                         onChange={handleTextareaChange}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey) {
+                                e.preventDefault(); // prevent newline
+                                const fakeFormEvent = { preventDefault: () => { } } as React.FormEvent<HTMLFormElement>;
+                                handleSubmit(fakeFormEvent);
+                            }
+                        }}
                         rows={1}
                     />
 
