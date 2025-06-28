@@ -10,7 +10,7 @@ type MessagesAreaProps = {
     messages: Message[];
     input: string;
     handleInputChange: React.ChangeEventHandler<HTMLInputElement>;
-    handleSubmit: React.FormEventHandler<HTMLFormElement>;
+    handleSubmit: (e?: React.FormEvent<HTMLFormElement>) => void;
     stop: () => void;
     status: 'streaming' | 'submitted' | 'ready' | 'error';
 };
@@ -92,8 +92,7 @@ export default function ChatArea({
                         onKeyDown={(e) => {
                             if (e.key === 'Enter' && !e.shiftKey) {
                                 e.preventDefault(); // prevent newline
-                                const fakeFormEvent = { preventDefault: () => { } } as React.FormEvent<HTMLFormElement>;
-                                handleSubmit(fakeFormEvent);
+                                handleSubmit();
                             }
                         }}
                         rows={1}
