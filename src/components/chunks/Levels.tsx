@@ -17,9 +17,9 @@ type LevelsProps = {
 export default function Levels({ userMessages, messageCount, messages }: LevelsProps) {
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
             <div className="text-lg pb-4 font-bold">Levels</div>
-            <div className="rounded-lg p-6 w-100 flex items-center bg-black/40 mb-6">
+            <div className="rounded-lg p-6 w-100 flex items-center bg-black/40 mb-4">
                 <div>
                     <div className="font-bold text-xl mb-2">
                         Level 1
@@ -37,7 +37,7 @@ export default function Levels({ userMessages, messageCount, messages }: LevelsP
                     </div>
                 </div>
             </div>
-            <div className="rounded-lg p-4 w-100 flex items-center bg-black/40 mb-6">
+            <div className="rounded-lg p-4 w-100 flex items-center bg-black/40 mb-4">
                 <Lock className="w-8 h-8 mr-4 text-white/50" />
                 <div>
                     <div className="font-bold mb-2">
@@ -52,7 +52,7 @@ export default function Levels({ userMessages, messageCount, messages }: LevelsP
                     </p>
                 </div>
             </div>
-            <div className="rounded-lg p-4 w-100 flex items-center bg-black/40 mb-6">
+            <div className="rounded-lg p-4 w-100 flex items-center bg-black/40 mb-4">
                 <Lock className="w-8 h-8 mr-4 text-white/50" />
                 <div>
                     <div className="font-bold mb-2">
@@ -67,7 +67,7 @@ export default function Levels({ userMessages, messageCount, messages }: LevelsP
                     </p>
                 </div>
             </div>
-            <div className="rounded-lg p-4 w-100 flex items-center bg-black/40 mb-6">
+            <div className="rounded-lg p-4 w-100 flex items-center bg-black/40 mb-4">
                 <Lock className="w-8 h-8 mr-4 text-white/50" />
                 <div>
                     <div className="font-bold mb-2">

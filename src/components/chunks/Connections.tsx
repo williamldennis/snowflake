@@ -21,7 +21,7 @@ type ConnectionsProps = {
 export default function Connections({ matchResult, totalCount }: ConnectionsProps) {
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
             <div className="text-lg pb-4 font-bold">Connections</div>
             <div className="rounded-lg p-4 w-100 flex items-center bg-black/40 mb-5">
 
@@ -40,7 +40,7 @@ export default function Connections({ matchResult, totalCount }: ConnectionsProp
                             <blockquote className="italic text-white/70 mt-2">“{matchResult.reason}”</blockquote>
                         </>
                     ) : (
-                        <p className="text-white/40 text-sm italic">Looking for your match...</p>
+                        <p className="text-white/40 text-sm italic">Keep chatting to see your match...</p>
                     )}
                 </div>
             </div>
