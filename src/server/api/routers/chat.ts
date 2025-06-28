@@ -125,6 +125,8 @@ Reason: Y
 
             if (!matchedTranscript) {
                 console.warn('[getMatchResult] No matched transcript found for matchedChatId:', result.matchedChatId);
+                // Delete the stale match result
+                await db.delete(matchResults).where(eq(matchResults.chatId, input.chatId));
                 return null;
             }
 

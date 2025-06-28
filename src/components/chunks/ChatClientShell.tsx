@@ -71,10 +71,29 @@ export default function ChatClientShell({
 
         if (userMessages.length >= 10 && !hasTriggeredRef.current) {
             hasTriggeredRef.current = true;
-
-            compareMutation.mutate({ chatId })
+            compareMutation.mutate({ chatId });
         }
     }, [messages, chatId, compareMutation]);
+
+    // If matchResult is null but we've already triggered matching, try again (e.g. after a stale match was deleted)
+    // Limit how many times we retry matching if matchResult stays null
+    const retryCountRef = useRef(0);
+    const MAX_RETRIES = 2;
+
+    useEffect(() => {
+        const userMessages = messages.filter((m) => m.role === 'user');
+        if (
+            userMessages.length >= 10 &&
+            hasTriggeredRef.current &&
+            matchResult === null &&
+            compareMutation.status !== "pending" &&
+            compareMutation.status !== "success" &&
+            retryCountRef.current < MAX_RETRIES
+        ) {
+            retryCountRef.current += 1;
+            compareMutation.mutate({ chatId });
+        }
+    }, [matchResult, messages, chatId, compareMutation]);
 
     return (
         <>
