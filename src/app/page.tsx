@@ -1,13 +1,10 @@
 import Link from "next/link";
 
-import { LatestPost } from "@/components/ui/post";
 import { auth } from "@/server/auth";
 import { api, HydrateClient } from "@/trpc/server";
-import { manrope } from "./layout";
 
 
 export default async function Home() {
-  const hello = await api.post.hello({ text: "from tRPC" });
   const session = await auth();
 
   if (session?.user) {
