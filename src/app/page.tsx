@@ -4,6 +4,7 @@ import { auth, signIn } from "@/server/auth";
 import { api, HydrateClient } from "@/trpc/server";
 import { Button } from "@/components/ui/button";
 import LoginButton from "@/components/ui/LoginButton";
+import { Syne } from "next/font/google";
 
 
 export default async function Home() {
@@ -30,8 +31,17 @@ export default async function Home() {
 
         <div className="absolute inset-0 flex flex-col items-center justify-center px-4 py-8 text-white">
           <div className="flex flex-col items-center justify-center border border-white/10 p-12 py-20 rounded-3xl backdrop-blur-sm">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-[5rem] mb-4">
-              Samesies
+            <h1
+              className="text-2xl font-extrabold tracking-tight sm:text-[5rem] mb-4"
+              style={{
+                fontFamily: 'var(--font-syne)',
+                fontSize: '5rem',
+                fontWeight: '800',
+                letterSpacing: '-0.05em',
+                marginBottom: '1rem',
+              }}
+            >
+              whomst
             </h1>
             <p className="text-lg mb-7">Find your humans.</p>
             <div className="flex flex-col items-center gap-2">
@@ -40,7 +50,7 @@ export default async function Home() {
             </p> */}
 
               <div className="flex">
-                
+
                 <LoginButton />
                 {/* <Link
                   href={session ? "/chat" : "/api/auth/signin/google?callbackUrl=/chat"}

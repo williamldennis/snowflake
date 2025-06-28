@@ -8,6 +8,7 @@ import Connections from './Connections';
 import { type Message } from '@ai-sdk/react';
 import { api } from '@/trpc/react';
 import { useEffect, useRef } from 'react';
+import { Syne } from 'next/font/google';
 
 type ChatClientShellProps = {
     name: string;
@@ -76,7 +77,11 @@ export default function ChatClientShell({
                     />
                 </div>
                 <div className="flex flex-col w-full max-w-[450px] justify-center items-center">
-                    <div className="mb-4 font-bold text-2xl">Samesies</div>
+                    <div
+                        style={{ fontFamily: 'var(--font-syne)' }}
+                        className="mb-4 font-bold text-2xl">
+                        whomst
+                    </div>
                     <MessagesArea
                         messages={messages}
                         input={input}
