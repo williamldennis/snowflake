@@ -2,9 +2,11 @@ import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
 import { loadChat } from "@/lib/chat-store";
 import ChatClientShell from "@/components/chunks/ChatClientShell";
+import type { JSX } from "react";
 
-
-export default async function ChatPage({ params }: { params: { id: string } }) {
+export default async function ChatPage({
+    params,
+}: { params: { id: string } }) {
     const session = await auth();
     const name = session?.user.name ?? ""
     const initialTranscript = await loadChat(params.id);
