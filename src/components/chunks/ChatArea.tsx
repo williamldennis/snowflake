@@ -4,6 +4,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { type Message } from '@ai-sdk/react';
+import { useEffect, useRef } from "react";
 
 type MessagesAreaProps = {
     name: string;
@@ -26,10 +27,27 @@ export default function ChatArea({
     status,
 }: MessagesAreaProps) {
 
+    const bottomRef = useRef<HTMLDivElement>(null);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    const handleTextareaChange: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+        // Resize textarea height dynamically
+        if (textareaRef.current) {
+            textareaRef.current.style.height = 'auto';
+            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+        }
+        // Forward event to useChat handler
+        handleInputChange(e as unknown as React.ChangeEvent<HTMLInputElement>);
+    };
+
+
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
 
     return (
         <div className="container flex flex-col items-center justify-center gap-6">
-            <ScrollArea className="h-[80vh] w-[450px] rounded-md border border-purple-100 p-4">
+            <ScrollArea className="h-[80vh] w-[450px] rounded-md border border-purple-100 px-4">
                 {messages.map(message => (
                     <div className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`} key={message.id}>
 
@@ -61,15 +79,21 @@ export default function ChatArea({
                         </div>
                     </div>
                 ))}
+                {/* 👇 Empty div used as anchor to scroll to bottom */}
+                <div ref={bottomRef} />
             </ScrollArea >
 
-            <div className="flex w-full max-w-sm items-center gap-2">
-                <form onSubmit={handleSubmit} className="flex w-full">
-                    <Input className="mr-2"
+            <div className="flex w-full items-center gap-2">
+                <form onSubmit={handleSubmit} className="flex w-full items-center gap-2">
+                    <textarea
+                        ref={textareaRef}
+                        className="w-full resize-none overflow-hidden rounded-md p-2 border bg-white/10 text-white"
                         name="prompt"
                         value={input}
-                        onChange={handleInputChange}
+                        onChange={handleTextareaChange}
+                        rows={1}
                     />
+
                     {
                         (status === 'submitted' || status === 'streaming') ? (
                             <Button
@@ -81,9 +105,9 @@ export default function ChatArea({
 
                         ) : (
                             < Button
-                                className="border bg-white text-purple-950"
+                                className="border bg-white text-purple-950 py-5"
                                 type="submit">
-                                Submit
+                                Send
                             </Button>)
                     }
 
