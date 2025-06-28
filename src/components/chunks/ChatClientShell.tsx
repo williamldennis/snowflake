@@ -8,7 +8,6 @@ import Connections from './Connections';
 import { type Message } from '@ai-sdk/react';
 import { api } from '@/trpc/react';
 import { useEffect, useRef } from 'react';
-import { Syne } from 'next/font/google';
 
 type ChatClientShellProps = {
     name: string;
