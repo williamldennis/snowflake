@@ -36,7 +36,11 @@ export default function ChatClientShell({
     const userMessageCount = messages.filter((m) => m.role === 'user').length;
 
     // ✅ tRPC query to fetch match result from DB (even on refresh)
-    const { data: matchResult, refetch } = api.chat.getMatchResult.useQuery({ chatId });
+    const { data: matchResult, refetch, isLoading: matchLoading, error: matchError } = api.chat.getMatchResult.useQuery({ chatId });
+    if (typeof window !== 'undefined') {
+        // eslint-disable-next-line no-console
+        console.log('[ChatClientShell] matchResult:', matchResult, 'loading:', matchLoading, 'error:', matchError);
+    }
 
     //tRPC To get total users
     const { data: totalCount } = api.chat.getTotalTranscriptCount.useQuery();
@@ -44,7 +48,17 @@ export default function ChatClientShell({
     // ✅ tRPC mutation to run comparison
     const compareMutation = api.chat.compareTranscript.useMutation({
         onSuccess: async () => {
+            if (typeof window !== 'undefined') {
+                // eslint-disable-next-line no-console
+                console.log('[ChatClientShell] compareMutation success');
+            }
             await refetch(); // re-fetch match result after matching completes
+        },
+        onError: (err) => {
+            if (typeof window !== 'undefined') {
+                // eslint-disable-next-line no-console
+                console.error('[ChatClientShell] compareMutation error:', err);
+            }
         },
     });
 
@@ -57,10 +71,29 @@ export default function ChatClientShell({
 
         if (userMessages.length >= 10 && !hasTriggeredRef.current) {
             hasTriggeredRef.current = true;
-
-            compareMutation.mutate({ chatId })
+            compareMutation.mutate({ chatId });
         }
     }, [messages, chatId, compareMutation]);
+
+    // If matchResult is null but we've already triggered matching, try again (e.g. after a stale match was deleted)
+    // Limit how many times we retry matching if matchResult stays null
+    const retryCountRef = useRef(0);
+    const MAX_RETRIES = 2;
+
+    useEffect(() => {
+        const userMessages = messages.filter((m) => m.role === 'user');
+        if (
+            userMessages.length >= 10 &&
+            hasTriggeredRef.current &&
+            matchResult === null &&
+            compareMutation.status !== "pending" &&
+            compareMutation.status !== "success" &&
+            retryCountRef.current < MAX_RETRIES
+        ) {
+            retryCountRef.current += 1;
+            compareMutation.mutate({ chatId });
+        }
+    }, [matchResult, messages, chatId, compareMutation]);
 
     return (
         <>
