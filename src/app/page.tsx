@@ -45,7 +45,7 @@ export default async function Home() {
               >
                 whomst
               </h1>
-              <p className="text-xl mb-7">Find your humans.</p>
+              <p className="mb-7">Find yourself. Find your herd.</p>
             </div>
 
 
