@@ -89,6 +89,13 @@ export default function ChatArea({
                         name="prompt"
                         value={input}
                         onChange={handleTextareaChange}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey) {
+                                e.preventDefault(); // prevent newline
+                                const fakeFormEvent = { preventDefault: () => { } } as React.FormEvent<HTMLFormElement>;
+                                handleSubmit(fakeFormEvent);
+                            }
+                        }}
                         rows={1}
                     />
 

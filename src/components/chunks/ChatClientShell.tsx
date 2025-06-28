@@ -26,7 +26,7 @@ export default function ChatClientShell({
         handleInputChange,
         handleSubmit,
         stop,
-        status,
+        status
     } = useChat({
         id: chatId,
         initialMessages,

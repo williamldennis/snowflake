@@ -38,7 +38,7 @@ export default function Levels({ userMessages }: LevelsProps) {
             </div>
             <div className="rounded-lg p-4 w-100 flex items-center bg-black/40 mb-4">
                 <Lock className="w-8 h-8 mr-4 text-white/50" />
-                <div>
+                <div className=" text-white/50">
                     <div className="font-bold mb-2">
                         Level 2
                     </div>
@@ -53,7 +53,7 @@ export default function Levels({ userMessages }: LevelsProps) {
             </div>
             <div className="rounded-lg p-4 w-100 flex items-center bg-black/40 mb-4">
                 <Lock className="w-8 h-8 mr-4 text-white/50" />
-                <div>
+                <div className=" text-white/50">
                     <div className="font-bold mb-2">
                         Level 3
                     </div>
@@ -68,7 +68,7 @@ export default function Levels({ userMessages }: LevelsProps) {
             </div>
             <div className="rounded-lg p-4 w-100 flex items-center bg-black/40 mb-4">
                 <Lock className="w-8 h-8 mr-4 text-white/50" />
-                <div>
+                <div className=" text-white/50">
                     <div className="font-bold mb-2">
                         Level 4
                     </div>
