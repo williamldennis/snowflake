@@ -13,11 +13,12 @@ type ConnectionsProps = {
         reason: string;
         matchedUserName: string
     } | null;
+    totalCount: number
 };
 
 
 
-export default function Connections({ matchResult }: ConnectionsProps) {
+export default function Connections({ matchResult, totalCount }: ConnectionsProps) {
 
     return (
         <div className="flex flex-col">
@@ -33,6 +34,8 @@ export default function Connections({ matchResult }: ConnectionsProps) {
                                 {matchResult.matchedUserName}
                             </div>
                             <p className="text-white/60 text-sm mt-1">Similarity score: {matchResult.score}/10</p>
+                            <div className="text-white/60 text-sm mt-1 mb-3">Out of {totalCount} possible people in the world</div>
+
                             <hr className="my-4 border-t border-white/20" />
                             <blockquote className="italic text-white/70 mt-2">“{matchResult.reason}”</blockquote>
                         </>

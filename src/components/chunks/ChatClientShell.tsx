@@ -38,6 +38,9 @@ export default function ChatClientShell({
     // ✅ tRPC query to fetch match result from DB (even on refresh)
     const { data: matchResult, refetch } = api.chat.getMatchResult.useQuery({ chatId });
 
+    //tRPC To get total users
+    const { data: totalCount, isLoading } = api.chat.getTotalTranscriptCount.useQuery();
+
     // ✅ tRPC mutation to run comparison
     const compareMutation = api.chat.compareTranscript.useMutation({
         onSuccess: () => {
@@ -65,7 +68,7 @@ export default function ChatClientShell({
                 <MyMenuBar name={name} />
             </div>
             <div className="flex justify-center min-h-screen bg-gray-100 bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-                <div className="hidden lg:block p-4 mt-20">
+                <div className="hidden lg:block p-4 mt-18">
                     <Levels
                         messages={messages}
                         messageCount={messages.length}
@@ -84,7 +87,7 @@ export default function ChatClientShell({
                         name={name}
                     />
                 </div>
-                <div className="hidden xl:block p-4 mt-20">
+                <div className="hidden xl:block p-4 mt-18">
                     <Connections
                         messages={messages}
                         matchResult={
@@ -97,6 +100,7 @@ export default function ChatClientShell({
                                 }
                                 : null
                         }
+                        totalCount={totalCount ?? 0}
                     />
                 </div>
             </div>

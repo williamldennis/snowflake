@@ -3,7 +3,7 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { db } from "@/server/db";
 import { chatTranscripts, matchResults, users } from "@/server/db/schema";
-import { eq, ne } from "drizzle-orm";
+import { eq, ne, sql } from "drizzle-orm";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -116,5 +116,12 @@ Reason: Y
             };
         }),
 
+    getTotalTranscriptCount: publicProcedure.query(async () => {
+        const result = await db
+            .select({ count: sql<number>`count(*)` })
+            .from(users)
+
+        return result?.[0]?.count
+    })
 
 });
