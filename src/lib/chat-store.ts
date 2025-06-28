@@ -1,4 +1,4 @@
-import { generateId, type Message } from 'ai';
+import { type Message } from 'ai';
 import { db } from '@/server/db';
 import { chatTranscripts } from '@/server/db/schema'; // or `conversations`
 import { eq } from 'drizzle-orm';
@@ -47,7 +47,7 @@ export async function getChatTranscript(id: string): Promise<string | null> {
         .from(chatTranscripts)
         .where(eq(chatTranscripts.id, id));
 
-    return chat?.transcript || null;
+    return chat?.transcript ?? null;
 }
 export async function loadChat(id: string): Promise<string | null> {
     return await getChatTranscript(id);

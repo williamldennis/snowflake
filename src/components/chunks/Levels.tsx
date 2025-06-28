@@ -1,6 +1,5 @@
 'use client'
 
-import { Checkbox } from "@/components/ui/checkbox"
 import ProgressBar from "../ui/progressBar";
 import type { Message } from "ai";
 import { Lock } from "lucide-react";
@@ -14,7 +13,7 @@ type LevelsProps = {
 
 
 
-export default function Levels({ userMessages, messageCount, messages }: LevelsProps) {
+export default function Levels({ userMessages }: LevelsProps) {
 
     return (
         <div className="flex flex-col items-center">
@@ -25,7 +24,7 @@ export default function Levels({ userMessages, messageCount, messages }: LevelsP
                         Level 1
                     </div>
                     <div className="font mb-2">
-                        Send 10 messages to discover who you're most similar to in the entire fricking world omg
+                        Send 10 messages to discover who you&apos;re most similar to in the entire fricking world omg
                     </div>
                     <div>
                         <div className="py-2">
@@ -45,7 +44,7 @@ export default function Levels({ userMessages, messageCount, messages }: LevelsP
                     </div>
                     <hr className="my-4 border-t border-white/20" />
                     <p className="mb-3">
-                        Send 10 messages to discover who you're very much NOT like.
+                        Send 10 messages to discover who you&apos;re very much NOT like.
                     </p>
                     <p className="mb-3 italic">
                         Hey we could all use a nemesis
@@ -63,7 +62,7 @@ export default function Levels({ userMessages, messageCount, messages }: LevelsP
                         Send 10 messages describing a skill or service you are happy to provide.
                     </p>
                     <p className="mb-3 italic">
-                        Jugglers I'm looking at you...
+                        Jugglers I&apos;m looking at you...
                     </p>
                 </div>
             </div>
@@ -78,7 +77,7 @@ export default function Levels({ userMessages, messageCount, messages }: LevelsP
                         Send 10 messages describing something in your life you need.
                     </p>
                     <p className="mb-3 italic">
-                        Need a new couch? Couldn't hurt to ask...
+                        Need a new couch? Couldn&apos;t hurt to ask...
                     </p>
                 </div>
             </div>

@@ -39,12 +39,12 @@ export default function ChatClientShell({
     const { data: matchResult, refetch } = api.chat.getMatchResult.useQuery({ chatId });
 
     //tRPC To get total users
-    const { data: totalCount, isLoading } = api.chat.getTotalTranscriptCount.useQuery();
+    const { data: totalCount } = api.chat.getTotalTranscriptCount.useQuery();
 
     // ✅ tRPC mutation to run comparison
     const compareMutation = api.chat.compareTranscript.useMutation({
-        onSuccess: () => {
-            refetch(); // re-fetch match result after matching completes
+        onSuccess: async () => {
+            await refetch(); // re-fetch match result after matching completes
         },
     });
 
@@ -58,7 +58,7 @@ export default function ChatClientShell({
         if (userMessages.length >= 10 && !hasTriggeredRef.current) {
             hasTriggeredRef.current = true;
 
-            compareMutation.mutate({ chatId });
+            compareMutation.mutate({ chatId })
         }
     }, [messages, chatId, compareMutation]);
 

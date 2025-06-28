@@ -2,7 +2,6 @@
 
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { type Message } from '@ai-sdk/react';
 import { useEffect, useRef } from "react";
 
@@ -18,7 +17,6 @@ type MessagesAreaProps = {
 
 
 export default function ChatArea({
-    name,
     messages,
     input,
     handleInputChange,

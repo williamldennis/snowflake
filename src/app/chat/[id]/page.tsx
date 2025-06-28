@@ -2,14 +2,15 @@ import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
 import { loadChat } from "@/lib/chat-store";
 import ChatClientShell from "@/components/chunks/ChatClientShell";
-import type { JSX } from "react";
+import type { Message } from "ai";
 
 export default async function ChatPage({
     params,
-}: { params: { id: string } }) {
+}: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
     const session = await auth();
     const name = session?.user.name ?? ""
-    const initialTranscript = await loadChat(params.id);
+    const initialTranscript = await loadChat(id);
 
     if (!session) {
         redirect("/")
@@ -19,8 +20,8 @@ export default async function ChatPage({
         <>
             <ChatClientShell
                 name={name}
-                chatId={params.id}
-                initialMessages={initialTranscript ? JSON.parse(initialTranscript) : []}
+                chatId={id}
+                initialMessages={initialTranscript ? JSON.parse(initialTranscript) as Message[]: []}
             />
         </>
 

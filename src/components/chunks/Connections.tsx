@@ -1,6 +1,5 @@
 'use client'
 
-import { Checkbox } from "@/components/ui/checkbox"
 import type { Message } from "ai";
 
 // Connections.tsx
